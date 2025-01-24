@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.newsnow.presentation.Dimens.MEDIUM_PADDING2
 import com.example.newsnow.presentation.Dimens.PAGE_INDICATOR_WIDTH
 import com.example.newsnow.presentation.common.NewsButton
@@ -27,7 +26,7 @@ import com.example.newsnow.presentation.onboarding.components.OnBoardingPage
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(event: (OnBoardingEvent) -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
@@ -74,7 +73,7 @@ fun OnBoardingScreen() {
                 NewsButton(text = buttonsState.value[1], onClick = {
                     scope.launch {
                         if (pagerState.currentPage == 2) {
-                            //TODO: Navigate to the main screen
+                            event(OnBoardingEvent.SaveAppEntry)
                         } else {
                             pagerState.animateScrollToPage(
                                 page = pagerState.currentPage + 1
@@ -87,10 +86,4 @@ fun OnBoardingScreen() {
         }
         Spacer(modifier = Modifier.weight(0.1f))
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun OnBoardingScreenPreview() {
-    OnBoardingScreen()
 }
