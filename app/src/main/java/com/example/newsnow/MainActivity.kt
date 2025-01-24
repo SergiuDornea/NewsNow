@@ -1,37 +1,28 @@
 package com.example.newsnow
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.lifecycleScope
-import com.example.newsnow.domain.usecases.AppEntryUseCases
-import com.example.newsnow.presentation.onboarding.OnBoardingScreen
-import com.example.newsnow.presentation.onboarding.OnBoardingViewModel
-import com.example.newsnow.ui.theme.NewsNowTheme
+import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.newsnow.presentation.navigation.NavGraph
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject
-    lateinit var useCases: AppEntryUseCases
+    val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        lifecycleScope.launch {
-            useCases.readAppEntry().collect {
-                Log.d("prun", it.toString())
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                viewModel.splashCondition.value
             }
         }
         setContent {
-            NewsNowTheme {
-                val viewModel: OnBoardingViewModel = hiltViewModel()
-                OnBoardingScreen(event = viewModel::onEvent)
-            }
+            val startDestination = viewModel.startDestination
+            NavGraph(startDestination = startDestination)
         }
     }
 }
