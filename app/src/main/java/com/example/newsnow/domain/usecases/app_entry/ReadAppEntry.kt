@@ -1,4 +1,4 @@
-package com.example.newsnow.domain.usecases
+package com.example.newsnow.domain.usecases.app_entry
 
 import com.example.newsnow.domain.manager.LocalUserManager
 import kotlinx.coroutines.flow.Flow
