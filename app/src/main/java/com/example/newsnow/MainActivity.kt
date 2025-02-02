@@ -1,6 +1,7 @@
 package com.example.newsnow
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             val startDestination = viewModel.startDestination
+            Log.d("API_KEY", "API Key: ${BuildConfig.API_KEY}")
             NavGraph(startDestination = startDestination)
         }
     }
