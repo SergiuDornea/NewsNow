@@ -2,7 +2,9 @@ package com.example.newsnow.presentation.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
@@ -14,7 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.paging.compose.LazyPagingItems
 import com.example.newsnow.R
 import com.example.newsnow.domain.model.Article
+import com.example.newsnow.present.SearchBar
 import com.example.newsnow.presentation.Dimens.MEDIUM_PADDING1
+import com.example.newsnow.presentation.navigation.Route
 
 @Composable
 fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
@@ -37,5 +41,17 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
             .statusBarsPadding()
     ) {
         Image(painter = painterResource(id = R.drawable.ic_logo), contentDescription = "Logo")
+        Spacer(modifier = Modifier.height(MEDIUM_PADDING1))
+
+        SearchBar(
+            text = "",
+            readOnly = true,
+            onValueChange = {},
+            onClick = { navigate(Route.SearchScreen.route) },
+            onSearch = {},
+        )
+        Spacer(modifier = Modifier.height(MEDIUM_PADDING1))
+
+
     }
 }
