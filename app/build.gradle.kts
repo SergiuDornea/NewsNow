@@ -1,3 +1,4 @@
+
 import java.io.FileInputStream
 import java.util.Properties
 
@@ -79,6 +80,13 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("androidx.paging:paging-compose:3.2.1")
     implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("androidx.paging:paging-runtime:3.3.5")
+    implementation ("androidx.paging:paging-compose:3.3.5")
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
 }
 
 kapt {
