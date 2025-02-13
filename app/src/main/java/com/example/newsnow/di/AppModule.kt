@@ -12,9 +12,12 @@ import com.example.newsnow.domain.repository.NewsRepository
 import com.example.newsnow.domain.usecases.app_entry.AppEntryUseCases
 import com.example.newsnow.domain.usecases.app_entry.ReadAppEntry
 import com.example.newsnow.domain.usecases.app_entry.SaveAppEntry
+import com.example.newsnow.domain.usecases.news.DeleteArticle
+import com.example.newsnow.domain.usecases.news.GetArticles
 import com.example.newsnow.domain.usecases.news.GetNews
 import com.example.newsnow.domain.usecases.news.NewsUseCases
 import com.example.newsnow.domain.usecases.news.SearchNews
+import com.example.newsnow.domain.usecases.news.UpsertArticle
 import com.example.newsnow.network.NewsApi
 import com.example.newsnow.util.Constants.BASE_URL
 import com.example.newsnow.util.Constants.LOCAL_DATABASE_NAME
@@ -55,8 +58,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(newsApi: NewsApi): NewsRepository {
-        return NewsRepositoryImpl(newsApi)
+    fun provideNewsRepository(
+        newsApi: NewsApi,
+        newsDao: NewsDao
+    ): NewsRepository {
+        return NewsRepositoryImpl(newsApi, newsDao)
     }
 
     @Provides
@@ -64,7 +70,10 @@ object AppModule {
     fun provideGetNewsUseCases(newsRepository: NewsRepository): NewsUseCases =
         NewsUseCases(
             getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository)
+            searchNews = SearchNews(newsRepository),
+            upsertArticle = UpsertArticle(newsRepository),
+            deleteArticle = DeleteArticle(newsRepository),
+            getArticles = GetArticles(newsRepository)
         )
 
     @Provides
