@@ -6,10 +6,13 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface NewsRepository {
-    fun getNews(sources: List<String>): Flow<PagingData<Article>>
 
+    fun getNews(sources: List<String>): Flow<PagingData<Article>>
     fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>>
+
     fun getArticles(): Flow<List<Article>>
+    fun getArticle(articleId: Int?): Article?
+
     suspend fun deleteArticle(article: Article)
     suspend fun upsertArticle(article: Article)
 }

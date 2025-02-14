@@ -1,5 +1,9 @@
 package com.example.newsnow.presentation.details
 
+import com.example.newsnow.domain.model.Article
+
 sealed class DetailsEvent {
-    object saveArticleEvent : DetailsEvent()
+    data class UpsertDeleteArticle(val article: Article) : DetailsEvent()
+
+    object RemoveSideEffect : DetailsEvent()
 }

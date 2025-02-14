@@ -13,6 +13,7 @@ import com.example.newsnow.domain.usecases.app_entry.AppEntryUseCases
 import com.example.newsnow.domain.usecases.app_entry.ReadAppEntry
 import com.example.newsnow.domain.usecases.app_entry.SaveAppEntry
 import com.example.newsnow.domain.usecases.news.DeleteArticle
+import com.example.newsnow.domain.usecases.news.GetArticle
 import com.example.newsnow.domain.usecases.news.GetArticles
 import com.example.newsnow.domain.usecases.news.GetNews
 import com.example.newsnow.domain.usecases.news.NewsUseCases
@@ -73,7 +74,8 @@ object AppModule {
             searchNews = SearchNews(newsRepository),
             upsertArticle = UpsertArticle(newsRepository),
             deleteArticle = DeleteArticle(newsRepository),
-            getArticles = GetArticles(newsRepository)
+            getArticles = GetArticles(newsRepository),
+            getArticle = GetArticle(newsRepository)
         )
 
     @Provides
