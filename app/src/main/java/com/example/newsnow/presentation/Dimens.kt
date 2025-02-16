@@ -15,6 +15,7 @@ object Dimens {
 
     val EXTRA_SMALL_PADDING = 3.dp
     val SMALL_ICON_SIZE = 11.dp
+    val ICON_SIZE = 16.dp
 
     val ARTICLE_IMAGE_HEIGHT = 248.dp
 }

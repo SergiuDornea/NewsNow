@@ -26,10 +26,13 @@ import com.example.newsnow.domain.model.Article
 import com.example.newsnow.present.SearchBar
 import com.example.newsnow.presentation.Dimens.MEDIUM_PADDING1
 import com.example.newsnow.presentation.common.ArticleList
-import com.example.newsnow.presentation.navigation.Route
 
 @Composable
-fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
+fun HomeScreen(
+    articles: LazyPagingItems<Article>,
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit
+) {
     val titles by remember {
         derivedStateOf {
             if (articles.itemCount > 10) {
@@ -64,7 +67,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
             text = "",
             readOnly = true,
             onValueChange = {},
-            onClick = { navigate(Route.SearchScreen.route) },
+            onClick = { navigateToSearch() },
             onSearch = {},
         )
         Spacer(modifier = Modifier.height(MEDIUM_PADDING1))
@@ -83,7 +86,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit) {
         ArticleList(
             modifier = Modifier.padding(horizontal = MEDIUM_PADDING1),
             articles = articles,
-            onClick = { navigate(Route.DetailsScreen.route) }
+            onClick = { navigateToDetails(it) }
         )
     }
 }
