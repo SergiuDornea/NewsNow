@@ -1,6 +1,7 @@
 package com.example.newsnow.presentation.news_navigator
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -11,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,6 +25,7 @@ import com.example.newsnow.domain.model.Article
 import com.example.newsnow.presentation.Dimens.MEDIUM_PADDING2
 import com.example.newsnow.presentation.bookmark.BookmarkScreen
 import com.example.newsnow.presentation.bookmark.BookmarkViewModel
+import com.example.newsnow.presentation.details.DetailsEvent
 import com.example.newsnow.presentation.details.DetailsScreen
 import com.example.newsnow.presentation.details.DetailsViewModel
 import com.example.newsnow.presentation.home.HomeScreen
@@ -102,6 +105,14 @@ fun NewsNavigator() {
                 }
                 composable(route = Route.DetailsScreen.route) {
                     val viewModel: DetailsViewModel = hiltViewModel()
+                    if (viewModel.sideEffect != null) {
+                        Toast.makeText(
+                            LocalContext.current,
+                            viewModel.sideEffect,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        viewModel.onEvent(DetailsEvent.RemoveSideEffect)
+                    }
                     navController.previousBackStackEntry?.savedStateHandle?.get<Article>("article")
                         ?.let { article ->
                             DetailsScreen(
