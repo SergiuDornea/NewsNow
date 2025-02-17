@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class Article(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val author: String,
+    val author: String?,
     val content: String,
     val description: String,
     val publishedAt: String,
