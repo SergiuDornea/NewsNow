@@ -6,8 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.newsnow.presentation.bookmark.BookmarkScreen
-import com.example.newsnow.presentation.bookmark.BookmarkViewModel
+import com.example.newsnow.presentation.news_navigator.NewsNavigator
 import com.example.newsnow.presentation.onboarding.OnBoardingScreen
 import com.example.newsnow.presentation.onboarding.OnBoardingViewModel
 import com.example.newsnow.ui.theme.NewsNowTheme
@@ -35,20 +34,10 @@ fun NavGraph(
 
         navigation(
             route = Route.NewsNavigation.route,
-            startDestination = Route.HomeScreen.route
+            startDestination = Route.NewsNavigatorScreen.route
         ) {
-            composable(route = Route.HomeScreen.route) {
-                val viewModel: BookmarkViewModel = hiltViewModel()
-                BookmarkScreen(viewModel.state.value, navigate = {})
-            }
-            composable(route = Route.SearchScreen.route) {
-
-            }
-            composable(route = Route.BookmarkScreen.route) {
-
-            }
-            composable(route = Route.DetailsScreen.route) {
-
+            composable(route = Route.NewsNavigatorScreen.route) {
+                NewsNavigator()
             }
         }
     }

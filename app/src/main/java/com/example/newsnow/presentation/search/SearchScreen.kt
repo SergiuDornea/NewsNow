@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.newsnow.domain.model.Article
 import com.example.newsnow.present.SearchBar
 import com.example.newsnow.presentation.Dimens.MEDIUM_PADDING1
 import com.example.newsnow.presentation.Dimens.MEDIUM_PADDING3
@@ -15,7 +16,7 @@ import com.example.newsnow.presentation.common.ArticleList
 fun SearchScreen(
     state: SearchState,
     event: (SearchEvent) -> Unit,
-    navigate: (String) -> Unit
+    navigateToDetails: (Article) -> Unit
 ) {
 
     Column(
@@ -33,7 +34,7 @@ fun SearchScreen(
         )
         state.article?.let {
             val articles = it.collectAsLazyPagingItems()
-            ArticleList(articles = articles, onClick = {})
+            ArticleList(articles = articles, onClick = { navigateToDetails(it) })
         }
     }
 }

@@ -21,11 +21,17 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.newsnow.R
 import com.example.newsnow.domain.model.Article
 import com.example.newsnow.presentation.Dimens.MEDIUM_PADDING2
+import com.example.newsnow.presentation.bookmark.BookmarkScreen
+import com.example.newsnow.presentation.bookmark.BookmarkViewModel
+import com.example.newsnow.presentation.details.DetailsScreen
+import com.example.newsnow.presentation.details.DetailsViewModel
 import com.example.newsnow.presentation.home.HomeScreen
 import com.example.newsnow.presentation.home.HomeViewModel
 import com.example.newsnow.presentation.navigation.Route
 import com.example.newsnow.presentation.news_navigator.components.BottomNavigation
 import com.example.newsnow.presentation.news_navigator.components.NewsBottomNavigation
+import com.example.newsnow.presentation.search.SearchScreen
+import com.example.newsnow.presentation.search.SearchViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -78,6 +84,37 @@ fun NewsNavigator() {
                         navigateToSearch = {
                             navigateToTab(navController, Route.SearchScreen.route)
                         },
+                        navigateToDetails = { article ->
+                            navigateToDetails(navController, article)
+                        }
+                    )
+                }
+                composable(route = Route.SearchScreen.route) {
+                    val viewModel: SearchViewModel = hiltViewModel()
+                    val state = viewModel.state.value
+                    SearchScreen(
+                        state = state,
+                        event = viewModel::onEvent,
+                        navigateToDetails = { article ->
+                            navigateToDetails(navController, article)
+                        }
+                    )
+                }
+                composable(route = Route.DetailsScreen.route) {
+                    val viewModel: DetailsViewModel = hiltViewModel()
+                    navController.previousBackStackEntry?.savedStateHandle?.get<Article>("article")
+                        ?.let { article ->
+                            DetailsScreen(
+                                article = article,
+                                event = viewModel::onEvent,
+                                navigateUp = { navController.navigateUp() })
+                        }
+                }
+                composable(route = Route.BookmarkScreen.route) {
+                    val viewModel: BookmarkViewModel = hiltViewModel()
+                    val state = viewModel.state.value
+                    BookmarkScreen(
+                        state = state,
                         navigateToDetails = { article ->
                             navigateToDetails(navController, article)
                         })
