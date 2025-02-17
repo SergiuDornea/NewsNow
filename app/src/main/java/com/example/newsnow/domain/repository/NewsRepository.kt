@@ -10,7 +10,7 @@ interface NewsRepository {
     fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>>
 
     fun getArticles(): Flow<List<Article>>
-    suspend fun getArticle(articleId: Int?): Article?
+    suspend fun getArticle(articleUrl: String): Article?
 
     suspend fun deleteArticle(article: Article)
     suspend fun upsertArticle(article: Article)

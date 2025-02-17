@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetArticle @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
-    suspend operator fun invoke(articleId: Int?) = newsRepository.getArticle(articleId)
+    suspend operator fun invoke(articleUrl: String) = newsRepository.getArticle(articleUrl)
 }

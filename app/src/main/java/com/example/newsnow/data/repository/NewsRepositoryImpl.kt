@@ -48,8 +48,8 @@ class NewsRepositoryImpl(
         return newsDao.getArticles()
     }
 
-    override suspend fun getArticle(articleId: Int?): Article? {
-        return newsDao.getArticle(articleId)
+    override suspend fun getArticle(articleUrl: String): Article? {
+        return newsDao.getArticle(articleUrl)
     }
 
     override suspend fun deleteArticle(article: Article) {
