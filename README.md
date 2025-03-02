@@ -1,4 +1,37 @@
-## NewsNow App  
+# NewsNow App  
+
+## Overview  
+NewsNow is a modern Android application that delivers the latest news to users in an engaging and intuitive way. It features a sleek UI with onboarding screens, a bookmark system, search functionality, and smooth navigation. The app is optimized for performance and follows best practices in Android development.  
+
+## Technologies Used  
+
+This project is built using **Jetpack Compose** for UI and follows the **MVVM architecture** with **dependency injection** and **data persistence**. The key technologies and libraries used include:  
+
+### 1. UI & Navigation  
+- **Jetpack Compose** – For building the modern, declarative UI.  
+- **AndroidX Core SplashScreen** 
+- **Hilt Navigation Compose** 
+
+### 2. Dependency Injection  
+- **Dagger-Hilt** 
+
+### 3. Networking & API Handling  
+- **Retrofit** 
+- **OkHttp Logging Interceptor** 
+
+### 4. Data Persistence  
+- **DataStore Preferences** 
+- **Room Database** 
+
+### 5. Image Loading  
+- **Coil** 
+
+### 6. Pagination  
+- **Paging 3** 
+
+---
+
+## Screenshots  
 
 ### Splash Screen  
 <img src="https://github.com/user-attachments/assets/7474fc1a-1436-41f4-9353-acee56168e4f" width="250" />
